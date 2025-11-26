@@ -115,6 +115,16 @@ CREATE TABLE avisos (
     FOREIGN KEY (grupo_id) REFERENCES grupos(id)
 );
 
+CREATE TABLE IF NOT EXISTS notas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT,
+    contenido TEXT,
+    completado BOOLEAN DEFAULT FALSE,
+    fecha_creacion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_actualizacion DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id)
+);
+
 -- INSERTAR DATOS DE PRUEBA
 INSERT INTO usuarios (usuario, contraseña, rol) VALUES
 ('alumno123', '1234', 'alumno'),
@@ -151,4 +161,5 @@ INSERT INTO profesor_materia (id_profesor, id_materia) VALUES
 (2, 1), (2, 2), (5, 3), (5, 4);
 
 INSERT INTO grupo_materia (id_grupo, id_materia, id_profesor) VALUES
+
 (1, 1, 2), (1, 2, 2), (2, 3, 5), (2, 4, 5);
